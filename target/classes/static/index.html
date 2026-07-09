@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger &mdash; Project Management System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="rail">
+    <div class="rail-brand">
+      <span class="rail-brand-mark">L</span>
+      <span class="rail-brand-name">Ledger</span>
+    </div>
+    <nav class="rail-nav">
+      <button class="rail-btn is-active" data-view="projects">Projects</button>
+      <button class="rail-btn" data-view="clients">Clients</button>
+      <button class="rail-btn" data-view="employees">Employees</button>
+    </nav>
+    <div class="rail-foot">Company &rarr; Clients &rarr; Projects &rarr; Team</div>
+  </aside>
+
+  <main class="stage">
+
+    <!-- PROJECTS VIEW -->
+    <section class="view is-active" id="view-projects">
+      <header class="view-head">
+        <div>
+          <h1>Projects</h1>
+          <p class="view-sub">Every engagement the company is currently running.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-project')">New project</button>
+      </header>
+      <div class="grid" id="project-list"></div>
+    </section>
+
+    <!-- CLIENTS VIEW -->
+    <section class="view" id="view-clients">
+      <header class="view-head">
+        <div>
+          <h1>Clients</h1>
+          <p class="view-sub">Companies the business delivers projects for.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-client')">New client</button>
+      </header>
+      <div class="grid" id="client-list"></div>
+    </section>
+
+    <!-- EMPLOYEES VIEW -->
+    <section class="view" id="view-employees">
+      <header class="view-head">
+        <div>
+          <h1>Employees</h1>
+          <p class="view-sub">Staff available to be assigned to projects.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('modal-employee')">New employee</button>
+      </header>
+      <div class="grid" id="employee-list"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL: New Client -->
+<div class="modal-backdrop" id="modal-client">
+  <form class="modal" onsubmit="return submitClient(event)">
+    <h2>New client</h2>
+    <label>Company name<input required id="client-name" type="text" placeholder="e.g. Orbit Retail"></label>
+    <label>Contact<input required id="client-contact" type="text" placeholder="email or phone"></label>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" onclick="closeModal('modal-client')">Cancel</button>
+      <button type="submit" class="btn btn-primary">Add client</button>
+    </div>
+  </form>
+</div>
+
+<!-- MODAL: New Employee -->
+<div class="modal-backdrop" id="modal-employee">
+  <form class="modal" onsubmit="return submitEmployee(event)">
+    <h2>New employee</h2>
+    <label>Name<input required id="emp-name" type="text" placeholder="e.g. Rhea Kapoor"></label>
+    <label>Designation<input required id="emp-designation" type="text" placeholder="e.g. Backend Engineer"></label>
+    <label>Skills <span class="hint">comma separated</span><input id="emp-skills" type="text" placeholder="Java, Spring, SQL"></label>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" onclick="closeModal('modal-employee')">Cancel</button>
+      <button type="submit" class="btn btn-primary">Add employee</button>
+    </div>
+  </form>
+</div>
+
+<!-- MODAL: New Project -->
+<div class="modal-backdrop" id="modal-project">
+  <form class="modal" onsubmit="return submitProject(event)">
+    <h2>New project</h2>
+    <label>Project name<input required id="proj-name" type="text" placeholder="e.g. Storefront Revamp"></label>
+    <label>Client
+      <select required id="proj-client"></select>
+    </label>
+    <label>Project type
+      <select id="proj-type">
+        <option value="WEB">Web Development</option>
+        <option value="MOBILE">Mobile App</option>
+        <option value="INFRA">Infrastructure</option>
+      </select>
+    </label>
+    <label>Requirement<textarea id="proj-requirement" rows="3" placeholder="General requirement text"></textarea></label>
+    <label>Features <span class="hint">comma separated</span><input id="proj-features" type="text" placeholder="Login, Checkout, Search"></label>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" onclick="closeModal('modal-project')">Cancel</button>
+      <button type="submit" class="btn btn-primary">Create project</button>
+    </div>
+  </form>
+</div>
+
+<!-- MODAL: Project detail (assignment / tracker / billing / feedback) -->
+<div class="modal-backdrop" id="modal-detail">
+  <div class="modal modal-wide" id="detail-body"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
