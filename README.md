@@ -25,5 +25,7 @@ rate. Every project is composed of a `Requirement`, `DevelopmentTracker`,
 `Billing`, and a list of `Feedback` entries, and is linked to a `Client`
 and a team of `Employee` objects.
 
+!project.png
+
 
 
